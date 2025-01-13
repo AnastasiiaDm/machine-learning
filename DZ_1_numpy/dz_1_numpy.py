@@ -18,7 +18,7 @@ print("median:", array_median)
 standard_deviated_array = np.std(array)
 print("Standard Deviation:", standard_deviated_array)
 
-array[array % 2] = 0
+array[array % 2 == 1] = 0
 print(array)
 
 # 2 NumPy indexing and slicing
@@ -34,15 +34,19 @@ broadcasted_2d_array_with_1d_array = array_2D + array_1D
 print("Broadcasted 2D array with 1D array: \n", broadcasted_2d_array_with_1d_array)
 
 # 4 5D massive
-array_2D_5_elem = np.append(array_2D, [[4, 7], [9, 5]], axis=1)
+# array_2D_5_elem = np.append(array_2D, [[4, 7], [9, 5]], axis=1)
+array_2D_5_elem = np.hstack((array_2D, np.array([[4, 7], [9, 5]])))
 print("2D Matrix with 5 elements:\n", array_2D_5_elem)
 
 unique_values = np.unique(array_2D_5_elem)
 print("Unique values:", unique_values)
 
-for row in array_2D_5_elem:
-    if np.sum(row) > 30:
-        print("Row with the sum that more than 30:", row)
+# for row in array_2D_5_elem:
+#     if np.sum(row) > 30:
+#         print("Row with the sum that more than 30:", row)
+
+rows_with_sum_gt_30 = array_2D_5_elem[np.sum(array_2D_5_elem, axis=1) > 30]
+print("Row with the sum that more than 30:", rows_with_sum_gt_30)
 
 #5 1D array with 20 numbs
 array_1D_20_elem = np.arange(1, 21)
